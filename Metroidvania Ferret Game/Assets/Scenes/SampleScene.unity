@@ -330,6 +330,7 @@ GameObject:
   - component: {fileID: 706617995}
   - component: {fileID: 706617998}
   - component: {fileID: 706617997}
+  - component: {fileID: 706617999}
   m_Layer: 0
   m_Name: NormalFerretChar_Prototype_StillFrame
   m_TagString: Untagged
@@ -447,6 +448,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &706617999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 706617994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af877cfd2b87d434dbd0e7464b6712e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerMoveSpeed: 50
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
