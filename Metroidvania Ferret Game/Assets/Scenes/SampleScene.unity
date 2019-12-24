@@ -541,7 +541,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af877cfd2b87d434dbd0e7464b6712e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerMoveSpeed: 100
+  m_playerMoveSpeed: 50
+  m_turningSpriteFlipThreshold: 0.1
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
