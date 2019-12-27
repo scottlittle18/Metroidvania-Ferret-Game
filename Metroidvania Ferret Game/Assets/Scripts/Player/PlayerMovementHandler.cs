@@ -27,7 +27,7 @@ public class PlayerMovementHandler : MonoBehaviour
 
     #region Standard Local Member Variables (m_ == A local member of a class)
     private bool m_isfacingLeft;
-    private bool m_canJump;
+    private bool m_isJumping = false;
     #endregion------------
 
     #region Component Variable Containers
@@ -43,9 +43,10 @@ public class PlayerMovementHandler : MonoBehaviour
     {
         public float m_horizontalMoveInput;
 
-        public bool m_isJumping;
+        public bool m_jumpInput;
     }
 
+    //Create a variable for the InputListener class
     private InputListener m_inputListener = new InputListener();
 
     // Start is called before the first frame update
@@ -62,7 +63,7 @@ public class PlayerMovementHandler : MonoBehaviour
         HorizontalMoveInputListener();
         JumpInputListener();
 
-        //If any input to the horizontal axis are detected, update the look direction to keep the sprite facing the last direction the player moved in
+        //If input to the horizontal axis is detected, update the look direction to keep the sprite facing the last direction the player moved in
         if (!Mathf.Approximately(m_inputListener.m_horizontalMoveInput, 0.0f))
             UpdateLookDirection();
 
@@ -98,13 +99,13 @@ public class PlayerMovementHandler : MonoBehaviour
     }
 
     /// <summary>
-    /// Listens for jump input.
+    /// Listens for jump input. This data is used by the JumpInputHandler() to apply the jump motion to the player.
     /// </summary>
     private void JumpInputListener()
     {
-        m_inputListener.m_isJumping = Input.GetButton("Jump");
+        m_inputListener.m_jumpInput = Input.GetButton("Jump");
     }
-    #endregion-------------------------------------------------------------------------------------------------------
+    #endregion
 
     #region ______________________________________________________________________HANDLERS__________________________
     /// <summary>
@@ -121,7 +122,9 @@ public class PlayerMovementHandler : MonoBehaviour
     /// <returns>Waits for the given length of time [Adjustable In-Editor]</returns>
     private IEnumerator JumpTimeLimiter()
     {
+        m_isJumping = true;
         yield return new WaitForSecondsRealtime(m_jumpLength);
+        m_isJumping = false;
     }
 
     /// <summary>
@@ -130,15 +133,27 @@ public class PlayerMovementHandler : MonoBehaviour
     private void JumpInputHandler()
     {
         // If the player is trying to jump
-        if (m_groundCheck.IsGrounded && m_inputListener.m_isJumping)
+        if (m_groundCheck.IsGrounded && m_inputListener.m_jumpInput)
         {
-            //TODO: Debug Jump Input
-            Debug.Log($"m_groundCheck.IsGrounded == {m_groundCheck.IsGrounded}");
+            m_playerRigidbody.velocity = new Vector2(m_playerRigidbody.velocity.x, m_playerJumpSpeed * Time.deltaTime);
 
+            StartCoroutine(JumpTimeLimiter());
+        }
+        //While Jumping
+        if (m_isJumping && m_inputListener.m_jumpInput)
+        {
+            //Keep the player's vertical velocity equal to their jump velocity
             m_playerRigidbody.velocity = new Vector2(m_playerRigidbody.velocity.x, m_playerJumpSpeed * Time.deltaTime);
         }
+
+        // When the player releases the jump input
+        if (Input.GetButtonUp("Jump"))
+        {
+            StopCoroutine(JumpTimeLimiter());
+            m_isJumping = false;
+        }
     }
-    
+
     /// <summary>
     /// Updates the direction the sprite should be facing based on the horizontal player input
     /// </summary>
@@ -162,21 +177,5 @@ public class PlayerMovementHandler : MonoBehaviour
                 m_playerSpriteRenderer.flipX = false;
         }
     }
-    #endregion-------------------------------------------------------------------------------------------------------
+    #endregion
 }
-
-
-
-/* Psuedo-Code
- * 
- *      Jump Timer:
- *          
- *          if (!groundCheck.IsGrounded && m_inputListener.m_isJumping)
- *          {
- *              StartCoroutine(JumpTimeLimiter);
- *          }
- *          else
- *          {
- *              StopCoroutine(JumpTimeLimiter);
- *          }
- */

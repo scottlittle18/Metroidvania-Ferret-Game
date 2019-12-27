@@ -20,17 +20,9 @@ public class GroundCheck : MonoBehaviour
         private set { m_isGrounded = value; }
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
     private void Update()
     {
+        //IsGrounded == true if the player is on an object in the "Ground" LayerMask.
         IsGrounded = Physics2D.OverlapCircle(this.transform.position, groundCheckRadius, whatIsGround);
-
-        //TODO: Debug GroundCheck.cs
-        Debug.Log($"IsGrounded == {IsGrounded}");
     }
 }
