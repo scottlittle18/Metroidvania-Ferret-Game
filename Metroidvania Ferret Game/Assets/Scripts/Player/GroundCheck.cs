@@ -13,6 +13,7 @@ public class GroundCheck : MonoBehaviour
     [SerializeField, Tooltip("Used to specify which layer mask the ground check will look for.")]
     private LayerMask whatIsGround;
 
+    //This allows the IsGrounded variable to be read from the associated object's movement script.
     private bool m_isGrounded;
     public bool IsGrounded
     {
