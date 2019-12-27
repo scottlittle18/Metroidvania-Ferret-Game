@@ -10,16 +10,20 @@ using UnityEngine;
 public class PlayerMovementHandler : MonoBehaviour
 {
     #region Serialized Fields
-    [Header("Player Movement Settings")]
+    [Header("Movement Settings")]
+    
+    [SerializeField, Tooltip("How fast will the player be able to run around?")]
+    private float m_accelerationSpeed = 0f;
 
     [SerializeField, Tooltip("How fast will the player be able to run around?")]
-    private float m_playerMoveSpeed = 0f;
+    private float m_maxMoveSpeed = 0f;
 
+    [Header("Jump Settings")]
     [SerializeField, Tooltip("How fast will the player be able to jump upward?")]
     private float m_playerJumpSpeed = 0f;
 
     [SerializeField, Tooltip("Adjusts the length of time that the jump input is accepted for. (This is modeled after Mario's jump mechanic).")]
-    private float m_jumpLength = 0;
+    private float m_jumpLength = 0f;
 
     [SerializeField, Tooltip("This determines how close to zero the player's velocity needs to be to flip the sprite in the Sprite Renderer.")]
     private float m_turningSpriteFlipThreshold = 0f;
@@ -28,12 +32,17 @@ public class PlayerMovementHandler : MonoBehaviour
     #region Standard Local Member Variables (m_ == A local member of a class)
     private bool m_isfacingLeft;
     private bool m_isJumping = false;
+
+    // This is for storing the friction value of the PhysMat that's been assigned to the player's collider.
+    private float m_playerPhysMatFriction;
     #endregion------------
 
     #region Component Variable Containers
     private Rigidbody2D m_playerRigidbody;
     private SpriteRenderer m_playerSpriteRenderer;
     private GroundCheck m_groundCheck;
+    //TODO: Swap with proper collider(s) later
+    private BoxCollider2D m_playerCollider;
     #endregion------------
 
     /// <summary>
@@ -69,7 +78,21 @@ public class PlayerMovementHandler : MonoBehaviour
 
         //TODO: Debugging PlayerMovementHandler.Update()
         Debug.Log($"The player's current horizontal input is: {m_inputListener.m_horizontalMoveInput}\n" +
-            $"The current value of the player's m_isFacingLeft variable is: {m_isfacingLeft}");
+            $"The current value of the player's m_isFacingLeft variable is: {m_isfacingLeft}\n" +
+            $"IsGround == {m_groundCheck.IsGrounded}");
+
+        Debug.Log($"Player friction var == {m_playerPhysMatFriction}\n" +
+            $"Player Material friction == {m_playerCollider.friction}");
+
+        // Set the friction of the player's collider to 0 to keep them from sticking to walls
+        //if (!m_groundCheck.IsGrounded)
+        //{
+        //    m_playerCollider.sharedMaterial.friction = 0.0f;
+        //}
+        //else if (m_groundCheck.IsGrounded) // Reset the player's friction to it's original value when the player is not on the ground
+        //{
+        //    m_playerCollider.sharedMaterial.friction = m_playerPhysMatFriction;
+        //}
     }
 
     private void FixedUpdate()
@@ -87,6 +110,8 @@ public class PlayerMovementHandler : MonoBehaviour
         m_playerRigidbody = GetComponent<Rigidbody2D>();
         m_playerSpriteRenderer = GetComponent<SpriteRenderer>();
         m_groundCheck = GetComponentInChildren<GroundCheck>();
+        m_playerCollider = GetComponent<BoxCollider2D>();
+        //m_playerPhysMatFriction = m_playerCollider.friction;
     }
 
     #region _________________________________________________________________LISTENERS______________________________
@@ -113,7 +138,13 @@ public class PlayerMovementHandler : MonoBehaviour
     /// </summary>
     private void HorizontalMoveInputHandler()
     {
-        m_playerRigidbody.velocity = new Vector2(m_inputListener.m_horizontalMoveInput * m_playerMoveSpeed * Time.deltaTime, m_playerRigidbody.velocity.y);
+        // TODO: If a dash ability is added this will need to be encapsulated in something like if (!m_isDashing){}
+
+        //Accelerate player and clamp their velocity
+        m_playerRigidbody.AddForce(Vector2.right * m_inputListener.m_horizontalMoveInput * m_accelerationSpeed);
+        Vector2 clampedVelocity = m_playerRigidbody.velocity;
+        clampedVelocity.x = Mathf.Clamp(m_playerRigidbody.velocity.x, -m_maxMoveSpeed, m_maxMoveSpeed);
+        m_playerRigidbody.velocity = clampedVelocity;
     }
 
     /// <summary>
@@ -132,18 +163,21 @@ public class PlayerMovementHandler : MonoBehaviour
     /// </summary>
     private void JumpInputHandler()
     {
+        
+
         // If the player is trying to jump
         if (m_groundCheck.IsGrounded && m_inputListener.m_jumpInput)
         {
-            m_playerRigidbody.velocity = new Vector2(m_playerRigidbody.velocity.x, m_playerJumpSpeed * Time.deltaTime);
-
+            //m_playerRigidbody.velocity = new Vector2(m_playerRigidbody.velocity.x, m_playerJumpSpeed * Time.deltaTime);
+            m_playerRigidbody.AddForce(Vector2.up * m_playerJumpSpeed);
             StartCoroutine(JumpTimeLimiter());
         }
         //While Jumping
         if (m_isJumping && m_inputListener.m_jumpInput)
         {
             //Keep the player's vertical velocity equal to their jump velocity
-            m_playerRigidbody.velocity = new Vector2(m_playerRigidbody.velocity.x, m_playerJumpSpeed * Time.deltaTime);
+            //m_playerRigidbody.velocity = new Vector2(m_playerRigidbody.velocity.x, m_playerJumpSpeed * Time.deltaTime);
+            m_playerRigidbody.AddForce(Vector2.up * m_playerJumpSpeed);
         }
 
         // When the player releases the jump input
