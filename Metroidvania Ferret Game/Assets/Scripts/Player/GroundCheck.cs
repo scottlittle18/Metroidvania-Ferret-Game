@@ -5,10 +5,13 @@ using UnityEngine;
 /// <summary>
 /// Used to detect if the attached character is on the ground
 /// </summary>
-[RequireComponent(typeof(Collider2D))] //TODO: --Polish-- Make this call for the proper collider
 public class GroundCheck : MonoBehaviour
 {
-    private BoxCollider2D m_groundCheckCollider;
+    [SerializeField, Tooltip("Adjusts the radius for the ground check object.")]
+    private float groundCheckRadius;
+
+    [SerializeField, Tooltip("Used to specify which layer mask the ground check will look for.")]
+    private LayerMask whatIsGround;
 
     private bool m_isGrounded;
     public bool IsGrounded
@@ -20,12 +23,14 @@ public class GroundCheck : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        m_groundCheckCollider = GetComponent<BoxCollider2D>();
+
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void Update()
     {
-        //If the player is standing on anything then they are grounded
-        IsGrounded = true;
+        IsGrounded = Physics2D.OverlapCircle(this.transform.position, groundCheckRadius, whatIsGround);
+
+        //TODO: Debug GroundCheck.cs
+        Debug.Log($"IsGrounded == {IsGrounded}");
     }
 }
