@@ -89,7 +89,7 @@ public class PlayerMovementHandler : MonoBehaviour
             $"Player Material friction == {m_playerCollider.friction}");
 
         // Set the friction of the player's collider to 0 to keep them from sticking to walls
-        if (!m_groundCheck.IsGrounded)
+        if (!m_groundCheck.IsGrounded || (m_groundCheck.IsGrounded && !Mathf.Approximately(m_inputListener.m_horizontalMoveInput, 0.0f)))
         {
             m_playerCollider.sharedMaterial.friction = 0.0f;
         }
@@ -143,13 +143,15 @@ public class PlayerMovementHandler : MonoBehaviour
     private void HorizontalMoveInputHandler()
     {
         // TODO: If a dash ability is added this will need to be encapsulated in something like if (!m_isDashing){}
-        //m_playerRigidbody.velocity = new Vector3(m_inputListener.m_horizontalMoveInput * m_maxMoveSpeed * Time.deltaTime, m_playerRigidbody.velocity.y, 0);
         //Accelerate player and clamp their velocity
         m_playerRigidbody.AddForce(Vector2.right * m_inputListener.m_horizontalMoveInput * m_runningAccelerationRate);
         Vector2 clampedVelocity = m_playerRigidbody.velocity;
         clampedVelocity.x = Mathf.Clamp(m_playerRigidbody.velocity.x, -m_maxMoveSpeed, m_maxMoveSpeed);
-        clampedVelocity.y = Mathf.Clamp(m_playerRigidbody.velocity.y, -m_maxMoveSpeed, m_maxMoveSpeed);
+        clampedVelocity.y = Mathf.Clamp(m_playerRigidbody.velocity.y, Mathf.NegativeInfinity, m_maxJumpSpeed);
         m_playerRigidbody.velocity = clampedVelocity;
+        
+        //TODO: Remove For Polish (Move Player by setting velocity)
+        //m_playerRigidbody.velocity = new Vector3(m_inputListener.m_horizontalMoveInput * m_maxMoveSpeed * Time.deltaTime, m_playerRigidbody.velocity.y, 0);
     }
 
     /// <summary>
