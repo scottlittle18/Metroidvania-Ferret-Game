@@ -88,15 +88,7 @@ public class PlayerMovementHandler : MonoBehaviour
         Debug.Log($"Player friction var == {m_playerPhysMatFriction}\n" +
             $"Player Material friction == {m_playerCollider.friction}");
 
-        // Set the friction of the player's collider to 0 to keep them from sticking to walls
-        if (!m_groundCheck.IsGrounded || (m_groundCheck.IsGrounded && !Mathf.Approximately(m_inputListener.m_horizontalMoveInput, 0.0f)))
-        {
-            m_playerCollider.sharedMaterial.friction = 0.0f;
-        }
-        else if (m_groundCheck.IsGrounded) // Reset the player's friction to it's original value when the player is not on the ground
-        {
-            m_playerCollider.sharedMaterial.friction = m_playerPhysMatFriction;
-        }
+        UpdatePhysicsMaterial();
     }
 
     private void FixedUpdate()
@@ -118,6 +110,19 @@ public class PlayerMovementHandler : MonoBehaviour
         m_playerPhysMatFriction = m_playerCollider.friction;
     }
 
+    private void UpdatePhysicsMaterial()
+    {
+        // Set the friction of the player's collider to 0 to keep them from sticking to walls
+        if (!m_groundCheck.IsGrounded || (m_groundCheck.IsGrounded && !Mathf.Approximately(m_inputListener.m_horizontalMoveInput, 0.0f)))
+        {
+            m_playerCollider.sharedMaterial.friction = m_playerRigidbody.sharedMaterial.friction = 0.0f;
+        }
+        else if (m_groundCheck.IsGrounded) // Reset the player's friction to it's original value when the player is not on the ground
+        {
+            m_playerCollider.sharedMaterial.friction = m_playerRigidbody.sharedMaterial.friction = m_playerPhysMatFriction;
+        }
+    }
+    
     #region _________________________________________________________________LISTENERS______________________________
     /// <summary>
     /// Listens for the input received from the player. This data is used by the HorizontalMoveInputHandler() to apply this to the movement of the player-character.
@@ -149,7 +154,13 @@ public class PlayerMovementHandler : MonoBehaviour
         clampedVelocity.x = Mathf.Clamp(m_playerRigidbody.velocity.x, -m_maxMoveSpeed, m_maxMoveSpeed);
         clampedVelocity.y = Mathf.Clamp(m_playerRigidbody.velocity.y, Mathf.NegativeInfinity, m_maxJumpSpeed);
         m_playerRigidbody.velocity = clampedVelocity;
-        
+
+        // If no movement input is detected but the player is still moving, this code block will stop the player's horizontal movement when the player is no longer holding a movement button
+        if (m_inputListener.m_horizontalMoveInput == 0.0f && m_playerRigidbody.velocity.x != 0.0f)
+        {
+            m_playerRigidbody.velocity = new Vector2(0.0f, m_playerRigidbody.velocity.y);
+        }
+
         //TODO: Remove For Polish (Move Player by setting velocity)
         //m_playerRigidbody.velocity = new Vector3(m_inputListener.m_horizontalMoveInput * m_maxMoveSpeed * Time.deltaTime, m_playerRigidbody.velocity.y, 0);
     }
