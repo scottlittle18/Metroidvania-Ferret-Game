@@ -545,8 +545,8 @@ MonoBehaviour:
   m_runningAccelerationRate: 200
   m_maxMoveSpeed: 15
   m_jumpingAccelerationRate: 100
-  m_maxJumpSpeed: 8
-  m_jumpLength: 0.5
+  m_maxJumpSpeed: 6
+  m_jumpLength: 0.3
   m_turningSpriteFlipThreshold: 0.1
 --- !u!1 &963194225
 GameObject:
@@ -643,7 +643,7 @@ GameObject:
   - component: {fileID: 1418692853}
   - component: {fileID: 1418692852}
   m_Layer: 9
-  m_Name: Ground_Dirt_Prototype (1)
+  m_Name: Ground_WidePlat_Prototype
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -732,8 +732,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1418692851}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.634, y: 2.166, z: 0}
-  m_LocalScale: {x: 0.5752649, y: 4.127068, z: 1}
+  m_LocalPosition: {x: 6.342, y: 0.203, z: 0}
+  m_LocalScale: {x: 2.8665447, y: 0.8543031, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
