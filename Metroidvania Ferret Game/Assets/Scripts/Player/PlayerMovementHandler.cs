@@ -6,7 +6,7 @@ using UnityEngine;
 /// <summary>
 /// Listens for and Handles movement related input (e.g. Running, Jumping, etc.)
 /// </summary>
-[RequireComponent(typeof(Rigidbody2D)), RequireComponent(typeof(GroundCheck))]
+[RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMovementHandler : MonoBehaviour
 {
     #region Serialized Fields
