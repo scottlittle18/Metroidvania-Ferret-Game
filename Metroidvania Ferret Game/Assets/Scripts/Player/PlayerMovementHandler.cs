@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Listens for and Handles movement related input (e.g. Running, Dashing, etc.)
+/// Listens for and Handles movement related input (e.g. Running, Jumping, etc.)
 /// </summary>
-[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Rigidbody2D)), RequireComponent(typeof(GroundCheck))]
 public class PlayerMovementHandler : MonoBehaviour
 {
     #region Serialized Fields
@@ -81,12 +81,12 @@ public class PlayerMovementHandler : MonoBehaviour
             UpdateLookDirection();
 
         //TODO: Debugging PlayerMovementHandler.Update()
-        Debug.Log($"The player's current horizontal input is: {m_inputListener.m_horizontalMoveInput}\n" +
-            $"The current value of the player's m_isFacingLeft variable is: {m_isfacingLeft}\n" +
-            $"IsGround == {m_groundCheck.IsGrounded}");
+        //Debug.Log($"The player's current horizontal input is: {m_inputListener.m_horizontalMoveInput}\n" +
+        //    $"The current value of the player's m_isFacingLeft variable is: {m_isfacingLeft}\n" +
+        //    $"IsGround == {m_groundCheck.IsGrounded}");
 
-        Debug.Log($"Player friction var == {m_playerPhysMatFriction}\n" +
-            $"Player Material friction == {m_playerCollider.friction}");
+        //Debug.Log($"Player friction var == {m_playerPhysMatFriction}\n" +
+        //    $"Player Material friction == {m_playerCollider.friction}");
 
         UpdatePhysicsMaterial();
     }

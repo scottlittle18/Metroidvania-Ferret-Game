@@ -8,16 +8,13 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider2D))]
 public class GroundCheck : MonoBehaviour
 {
-    //[SerializeField, Tooltip("Adjusts the radius for the ground check object.")]
-    //private float groundCheckRadius;
-
-    //[SerializeField, Tooltip("Used to specify which layer mask the ground check will look for.")]
-    //private LayerMask whatIsGround;
-
     private BoxCollider2D m_groundCheckCollider;
 
     //This allows the IsGrounded variable to be read from the associated object's movement script.
     private bool m_isGrounded;
+    /// <summary>
+    /// Used to check if the object that this is attatched to is on the ground or not
+    /// </summary>
     public bool IsGrounded
     {
         get { return m_isGrounded; }
