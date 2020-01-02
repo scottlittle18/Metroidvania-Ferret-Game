@@ -543,7 +543,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_runningAccelerationRate: 200
-  m_maxMoveSpeed: 15
+  m_maxMoveSpeed: 10
   m_jumpingAccelerationRate: 100
   m_maxJumpSpeed: 6
   m_jumpLength: 0.3
