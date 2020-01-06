@@ -1,11 +1,14 @@
 /target:library
 /nowarn:0169
-/out:Temp/Assembly-CSharp.dll
+/out:Temp/Unity.TextMeshPro.dll
 /debug:portable
 /optimize-
 /nostdlib+
 /preferreduilang:en-US
 /langversion:latest
+/reference:Library/ScriptAssemblies/UnityEditor.UI.dll
+/reference:Library/ScriptAssemblies/Unity.2D.Tilemap.Editor.dll
+/reference:Library/ScriptAssemblies/UnityEngine.UI.dll
 /reference:"D:/Unity 2018.3.1f1/2019.2.9f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll"
 /reference:"D:/Unity 2018.3.1f1/2019.2.9f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll"
 /reference:"D:/Unity 2018.3.1f1/2019.2.9f1/Editor/Data/Managed/UnityEngine/UnityEngine.ARModule.dll"
@@ -67,17 +70,16 @@
 /reference:"D:/Unity 2018.3.1f1/2019.2.9f1/Editor/Data/Managed/UnityEngine/UnityEngine.WindModule.dll"
 /reference:"D:/Unity 2018.3.1f1/2019.2.9f1/Editor/Data/Managed/UnityEngine/UnityEngine.XRModule.dll"
 /reference:"D:/Unity 2018.3.1f1/2019.2.9f1/Editor/Data/Managed/UnityEditor.dll"
-/reference:Library/ScriptAssemblies/Unity.Timeline.Editor.dll
-/reference:Library/ScriptAssemblies/Unity.VSCode.Editor.dll
-/reference:Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll
-/reference:Library/ScriptAssemblies/UnityEngine.UI.dll
-/reference:Library/ScriptAssemblies/Unity.Timeline.dll
-/reference:Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll
-/reference:Library/ScriptAssemblies/Unity.Rider.Editor.dll
-/reference:Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll
-/reference:Library/ScriptAssemblies/Unity.2D.Tilemap.Editor.dll
-/reference:Library/ScriptAssemblies/Unity.TextMeshPro.dll
-/reference:Library/ScriptAssemblies/UnityEditor.UI.dll
+/reference:"D:/Unity 2018.3.1f1/2019.2.9f1/Editor/Data/UnityExtensions/Unity/UnityVR/Editor/UnityEditor.VR.dll"
+/reference:"D:/Unity 2018.3.1f1/2019.2.9f1/Editor/Data/Managed/UnityEditor.Graphs.dll"
+/reference:"D:/Unity 2018.3.1f1/2019.2.9f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll"
+/reference:"D:/Unity 2018.3.1f1/2019.2.9f1/Editor/Data/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll"
+/reference:"D:/Unity 2018.3.1f1/2019.2.9f1/Editor/Data/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll"
+/reference:"D:/Unity 2018.3.1f1/2019.2.9f1/Editor/Data/PlaybackEngines/LinuxStandaloneSupport/UnityEditor.LinuxStandalone.Extensions.dll"
+/reference:"D:/Unity 2018.3.1f1/2019.2.9f1/Editor/Data/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll"
+/reference:"D:/Unity 2018.3.1f1/2019.2.9f1/Editor/Data/PlaybackEngines/MetroSupport/UnityEditor.UWP.Extensions.dll"
+/reference:"D:/Unity 2018.3.1f1/2019.2.9f1/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.dll"
+/reference:"C:/Program Files (x86)/Microsoft Visual Studio Tools for Unity/15.0/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll"
 /reference:"D:/Unity 2018.3.1f1/2019.2.9f1/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll"
 /reference:"D:/Unity 2018.3.1f1/2019.2.9f1/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Common.dll"
 /reference:"D:/Unity 2018.3.1f1/2019.2.9f1/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll"
@@ -289,7 +291,59 @@
 /define:ENABLE_LEGACY_INPUT_MANAGER
 /define:CSHARP_7_OR_LATER
 /define:CSHARP_7_3_OR_NEWER
-Assets\Scripts\Player\GroundCheck.cs
-Assets\Scripts\Player\PlayerMovementHandler.cs
-Assets\Scripts\PSController_SteamPlume.cs
-Assets\Scripts\RisingPlatformVelocityLimiter.cs
+"D:\Github(NonLFS)\Metroidvania-Ferret-Game\Metroidvania Ferret Game\Library\PackageCache\com.unity.textmeshpro@2.0.1\Scripts\Runtime\AssemblyInfo.cs.cs"
+"D:\Github(NonLFS)\Metroidvania-Ferret-Game\Metroidvania Ferret Game\Library\PackageCache\com.unity.textmeshpro@2.0.1\Scripts\Runtime\FastAction.cs"
+"D:\Github(NonLFS)\Metroidvania-Ferret-Game\Metroidvania Ferret Game\Library\PackageCache\com.unity.textmeshpro@2.0.1\Scripts\Runtime\MaterialReferenceManager.cs"
+"D:\Github(NonLFS)\Metroidvania-Ferret-Game\Metroidvania Ferret Game\Library\PackageCache\com.unity.textmeshpro@2.0.1\Scripts\Runtime\TextContainer.cs"
+"D:\Github(NonLFS)\Metroidvania-Ferret-Game\Metroidvania Ferret Game\Library\PackageCache\com.unity.textmeshpro@2.0.1\Scripts\Runtime\TextMeshPro.cs"
+"D:\Github(NonLFS)\Metroidvania-Ferret-Game\Metroidvania Ferret Game\Library\PackageCache\com.unity.textmeshpro@2.0.1\Scripts\Runtime\TextMeshProUGUI.cs"
+"D:\Github(NonLFS)\Metroidvania-Ferret-Game\Metroidvania Ferret Game\Library\PackageCache\com.unity.textmeshpro@2.0.1\Scripts\Runtime\TMP_Asset.cs"
+"D:\Github(NonLFS)\Metroidvania-Ferret-Game\Metroidvania Ferret Game\Library\PackageCache\com.unity.textmeshpro@2.0.1\Scripts\Runtime\TMP_Character.cs"
+"D:\Github(NonLFS)\Metroidvania-Ferret-Game\Metroidvania Ferret Game\Library\PackageCache\com.unity.textmeshpro@2.0.1\Scripts\Runtime\TMP_CharacterInfo.cs"
+"D:\Github(NonLFS)\Metroidvania-Ferret-Game\Metroidvania Ferret Game\Library\PackageCache\com.unity.textmeshpro@2.0.1\Scripts\Runtime\TMP_ColorGradient.cs"
+"D:\Github(NonLFS)\Metroidvania-Ferret-Game\Metroidvania Ferret Game\Library\PackageCache\com.unity.textmeshpro@2.0.1\Scripts\Runtime\TMP_CoroutineTween.cs"
+"D:\Github(NonLFS)\Metroidvania-Ferret-Game\Metroidvania Ferret Game\Library\PackageCache\com.unity.textmeshpro@2.0.1\Scripts\Runtime\TMP_DefaultControls.cs"
+"D:\Github(NonLFS)\Metroidvania-Ferret-Game\Metroidvania Ferret Game\Library\PackageCache\com.unity.textmeshpro@2.0.1\Scripts\Runtime\TMP_Dropdown.cs"
+"D:\Github(NonLFS)\Metroidvania-Ferret-Game\Metroidvania Ferret Game\Library\PackageCache\com.unity.textmeshpro@2.0.1\Scripts\Runtime\TMP_EditorResourceManager.cs"
+"D:\Github(NonLFS)\Metroidvania-Ferret-Game\Metroidvania Ferret Game\Library\PackageCache\com.unity.textmeshpro@2.0.1\Scripts\Runtime\TMP_FontAsset.cs"
+"D:\Github(NonLFS)\Metroidvania-Ferret-Game\Metroidvania Ferret Game\Library\PackageCache\com.unity.textmeshpro@2.0.1\Scripts\Runtime\TMP_FontAssetCommon.cs"
+"D:\Github(NonLFS)\Metroidvania-Ferret-Game\Metroidvania Ferret Game\Library\PackageCache\com.unity.textmeshpro@2.0.1\Scripts\Runtime\TMP_FontAssetUtilities.cs"
+"D:\Github(NonLFS)\Metroidvania-Ferret-Game\Metroidvania Ferret Game\Library\PackageCache\com.unity.textmeshpro@2.0.1\Scripts\Runtime\TMP_FontFeaturesCommon.cs"
+"D:\Github(NonLFS)\Metroidvania-Ferret-Game\Metroidvania Ferret Game\Library\PackageCache\com.unity.textmeshpro@2.0.1\Scripts\Runtime\TMP_FontFeatureTable.cs"
+"D:\Github(NonLFS)\Metroidvania-Ferret-Game\Metroidvania Ferret Game\Library\PackageCache\com.unity.textmeshpro@2.0.1\Scripts\Runtime\TMP_InputField.cs"
+"D:\Github(NonLFS)\Metroidvania-Ferret-Game\Metroidvania Ferret Game\Library\PackageCache\com.unity.textmeshpro@2.0.1\Scripts\Runtime\TMP_InputValidator.cs"
+"D:\Github(NonLFS)\Metroidvania-Ferret-Game\Metroidvania Ferret Game\Library\PackageCache\com.unity.textmeshpro@2.0.1\Scripts\Runtime\TMP_LineInfo.cs"
+"D:\Github(NonLFS)\Metroidvania-Ferret-Game\Metroidvania Ferret Game\Library\PackageCache\com.unity.textmeshpro@2.0.1\Scripts\Runtime\TMP_ListPool.cs"
+"D:\Github(NonLFS)\Metroidvania-Ferret-Game\Metroidvania Ferret Game\Library\PackageCache\com.unity.textmeshpro@2.0.1\Scripts\Runtime\TMP_MaterialManager.cs"
+"D:\Github(NonLFS)\Metroidvania-Ferret-Game\Metroidvania Ferret Game\Library\PackageCache\com.unity.textmeshpro@2.0.1\Scripts\Runtime\TMP_MeshInfo.cs"
+"D:\Github(NonLFS)\Metroidvania-Ferret-Game\Metroidvania Ferret Game\Library\PackageCache\com.unity.textmeshpro@2.0.1\Scripts\Runtime\TMP_ObjectPool.cs"
+"D:\Github(NonLFS)\Metroidvania-Ferret-Game\Metroidvania Ferret Game\Library\PackageCache\com.unity.textmeshpro@2.0.1\Scripts\Runtime\TMP_PackageResourceImporter.cs"
+"D:\Github(NonLFS)\Metroidvania-Ferret-Game\Metroidvania Ferret Game\Library\PackageCache\com.unity.textmeshpro@2.0.1\Scripts\Runtime\TMP_RichTextTagsCommon.cs"
+"D:\Github(NonLFS)\Metroidvania-Ferret-Game\Metroidvania Ferret Game\Library\PackageCache\com.unity.textmeshpro@2.0.1\Scripts\Runtime\TMP_RichTextTagStack.cs"
+"D:\Github(NonLFS)\Metroidvania-Ferret-Game\Metroidvania Ferret Game\Library\PackageCache\com.unity.textmeshpro@2.0.1\Scripts\Runtime\TMP_ScrollbarEventHandler.cs"
+"D:\Github(NonLFS)\Metroidvania-Ferret-Game\Metroidvania Ferret Game\Library\PackageCache\com.unity.textmeshpro@2.0.1\Scripts\Runtime\TMP_SelectionCaret.cs"
+"D:\Github(NonLFS)\Metroidvania-Ferret-Game\Metroidvania Ferret Game\Library\PackageCache\com.unity.textmeshpro@2.0.1\Scripts\Runtime\TMP_Settings.cs"
+"D:\Github(NonLFS)\Metroidvania-Ferret-Game\Metroidvania Ferret Game\Library\PackageCache\com.unity.textmeshpro@2.0.1\Scripts\Runtime\TMP_ShaderUtilities.cs"
+"D:\Github(NonLFS)\Metroidvania-Ferret-Game\Metroidvania Ferret Game\Library\PackageCache\com.unity.textmeshpro@2.0.1\Scripts\Runtime\TMP_Sprite.cs"
+"D:\Github(NonLFS)\Metroidvania-Ferret-Game\Metroidvania Ferret Game\Library\PackageCache\com.unity.textmeshpro@2.0.1\Scripts\Runtime\TMP_SpriteAnimator.cs"
+"D:\Github(NonLFS)\Metroidvania-Ferret-Game\Metroidvania Ferret Game\Library\PackageCache\com.unity.textmeshpro@2.0.1\Scripts\Runtime\TMP_SpriteAsset.cs"
+"D:\Github(NonLFS)\Metroidvania-Ferret-Game\Metroidvania Ferret Game\Library\PackageCache\com.unity.textmeshpro@2.0.1\Scripts\Runtime\TMP_SpriteAssetImportFormats.cs"
+"D:\Github(NonLFS)\Metroidvania-Ferret-Game\Metroidvania Ferret Game\Library\PackageCache\com.unity.textmeshpro@2.0.1\Scripts\Runtime\TMP_SpriteCharacter.cs"
+"D:\Github(NonLFS)\Metroidvania-Ferret-Game\Metroidvania Ferret Game\Library\PackageCache\com.unity.textmeshpro@2.0.1\Scripts\Runtime\TMP_SpriteGlyph.cs"
+"D:\Github(NonLFS)\Metroidvania-Ferret-Game\Metroidvania Ferret Game\Library\PackageCache\com.unity.textmeshpro@2.0.1\Scripts\Runtime\TMP_Style.cs"
+"D:\Github(NonLFS)\Metroidvania-Ferret-Game\Metroidvania Ferret Game\Library\PackageCache\com.unity.textmeshpro@2.0.1\Scripts\Runtime\TMP_StyleSheet.cs"
+"D:\Github(NonLFS)\Metroidvania-Ferret-Game\Metroidvania Ferret Game\Library\PackageCache\com.unity.textmeshpro@2.0.1\Scripts\Runtime\TMP_SubMesh.cs"
+"D:\Github(NonLFS)\Metroidvania-Ferret-Game\Metroidvania Ferret Game\Library\PackageCache\com.unity.textmeshpro@2.0.1\Scripts\Runtime\TMP_SubMeshUI.cs"
+"D:\Github(NonLFS)\Metroidvania-Ferret-Game\Metroidvania Ferret Game\Library\PackageCache\com.unity.textmeshpro@2.0.1\Scripts\Runtime\TMP_Text.cs"
+"D:\Github(NonLFS)\Metroidvania-Ferret-Game\Metroidvania Ferret Game\Library\PackageCache\com.unity.textmeshpro@2.0.1\Scripts\Runtime\TMP_TextElement.cs"
+"D:\Github(NonLFS)\Metroidvania-Ferret-Game\Metroidvania Ferret Game\Library\PackageCache\com.unity.textmeshpro@2.0.1\Scripts\Runtime\TMP_TextElement_Legacy.cs"
+"D:\Github(NonLFS)\Metroidvania-Ferret-Game\Metroidvania Ferret Game\Library\PackageCache\com.unity.textmeshpro@2.0.1\Scripts\Runtime\TMP_TextInfo.cs"
+"D:\Github(NonLFS)\Metroidvania-Ferret-Game\Metroidvania Ferret Game\Library\PackageCache\com.unity.textmeshpro@2.0.1\Scripts\Runtime\TMP_TextParsingUtilities.cs"
+"D:\Github(NonLFS)\Metroidvania-Ferret-Game\Metroidvania Ferret Game\Library\PackageCache\com.unity.textmeshpro@2.0.1\Scripts\Runtime\TMP_TextUtilities.cs"
+"D:\Github(NonLFS)\Metroidvania-Ferret-Game\Metroidvania Ferret Game\Library\PackageCache\com.unity.textmeshpro@2.0.1\Scripts\Runtime\TMP_UpdateManager.cs"
+"D:\Github(NonLFS)\Metroidvania-Ferret-Game\Metroidvania Ferret Game\Library\PackageCache\com.unity.textmeshpro@2.0.1\Scripts\Runtime\TMP_UpdateRegistery.cs"
+"D:\Github(NonLFS)\Metroidvania-Ferret-Game\Metroidvania Ferret Game\Library\PackageCache\com.unity.textmeshpro@2.0.1\Scripts\Runtime\TMPro_EventManager.cs"
+"D:\Github(NonLFS)\Metroidvania-Ferret-Game\Metroidvania Ferret Game\Library\PackageCache\com.unity.textmeshpro@2.0.1\Scripts\Runtime\TMPro_ExtensionMethods.cs"
+"D:\Github(NonLFS)\Metroidvania-Ferret-Game\Metroidvania Ferret Game\Library\PackageCache\com.unity.textmeshpro@2.0.1\Scripts\Runtime\TMPro_MeshUtilities.cs"
+"D:\Github(NonLFS)\Metroidvania-Ferret-Game\Metroidvania Ferret Game\Library\PackageCache\com.unity.textmeshpro@2.0.1\Scripts\Runtime\TMPro_Private.cs"
+"D:\Github(NonLFS)\Metroidvania-Ferret-Game\Metroidvania Ferret Game\Library\PackageCache\com.unity.textmeshpro@2.0.1\Scripts\Runtime\TMPro_UGUI_Private.cs"

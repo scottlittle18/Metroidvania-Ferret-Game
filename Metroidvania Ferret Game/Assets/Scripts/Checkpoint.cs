@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Animations;
 
+/// <summary>
+/// Used to handle the checkpoint system.
+/// </summary>
 public class Checkpoint : MonoBehaviour
 {    
-    private bool isActivated;   
-    private Animator anim;
-    private PlayerController player;
+    private bool m_isActivated;   
+    private Animator m_anim;
+    private PlayerHealthSystem m_playerHealth;
     /// <summary>
     /// Property Used to Activate or Deactivate checkpoints
     /// </summary>
@@ -15,18 +18,18 @@ public class Checkpoint : MonoBehaviour
     {
         get
         {
-            return isActivated;
+            return m_isActivated;
         }
         set
         {
-            isActivated = value;
+            m_isActivated = value;
             UpdateAnimation();
         }
     }
 
     private void Awake()
     {
-        anim = GetComponent<Animator>();
+        m_anim = GetComponent<Animator>();
     }
 
     private void Start()
@@ -34,17 +37,20 @@ public class Checkpoint : MonoBehaviour
         IsActivated = false;        
     }
 
+    /// <summary>
+    /// Update the animator of the checkpoint.
+    /// </summary>
+    private void UpdateAnimation()
+    {
+        m_anim.SetBool("isActivated", IsActivated);
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
-        {            
-            player = collision.GetComponent<PlayerController>();
-            player.CurrentCheckpoint = this;
+        {
+            m_playerHealth = collision.GetComponent<PlayerHealthSystem>();
+            m_playerHealth.CurrentCheckpoint = this;
         }
-    }
-
-    private void UpdateAnimation()
-    {
-        anim.SetBool("isActivated", IsActivated);
     }
 }
