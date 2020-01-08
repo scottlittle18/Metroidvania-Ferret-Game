@@ -36,7 +36,6 @@ public class PlayerMovementHandler : MonoBehaviour
     #region Standard Local Member Variables (m_ == A local member of a class)
     private bool m_isfacingLeft;
     private bool m_isJumping = false;
-
     // This is for storing the friction value of the PhysMat that's been assigned to the player's collider.
     private float m_playerPhysMatFriction;
     #endregion------------
@@ -47,6 +46,9 @@ public class PlayerMovementHandler : MonoBehaviour
     private GroundCheck m_groundCheck;
     //TODO: Swap with proper collider(s) later
     private BoxCollider2D m_playerCollider;
+
+    // Player Systems
+    private PlayerHealthSystem m_playerHealthSystem;
     #endregion------------
 
     /// <summary>
@@ -72,21 +74,16 @@ public class PlayerMovementHandler : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        //--Listeners--
-        HorizontalMoveInputListener();
-        JumpInputListener();
+        if (m_playerHealthSystem.IsAlive)
+        {
+            //--Listeners--
+            HorizontalMoveInputListener();
+            JumpInputListener();
 
-        //If input to the horizontal axis is detected, update the look direction to keep the sprite facing the last direction the player moved in
-        if (!Mathf.Approximately(m_inputListener.m_horizontalMoveInput, 0.0f))
-            UpdateLookDirection();
-
-        //TODO: Debugging PlayerMovementHandler.Update()
-        //Debug.Log($"The player's current horizontal input is: {m_inputListener.m_horizontalMoveInput}\n" +
-        //    $"The current value of the player's m_isFacingLeft variable is: {m_isfacingLeft}\n" +
-        //    $"IsGround == {m_groundCheck.IsGrounded}");
-
-        //Debug.Log($"Player friction var == {m_playerPhysMatFriction}\n" +
-        //    $"Player Material friction == {m_playerCollider.friction}");
+            //If input to the horizontal axis is detected, update the look direction to keep the sprite facing the last direction the player moved in
+            if (!Mathf.Approximately(m_inputListener.m_horizontalMoveInput, 0.0f))
+                UpdateLookDirection();
+        }
 
         UpdatePhysicsMaterial();
     }
@@ -103,6 +100,9 @@ public class PlayerMovementHandler : MonoBehaviour
     /// </summary>
     private void InitializePlayerComponents()
     {
+        // Initialize Player Systems (e.g. health, attack, etc.)
+        m_playerHealthSystem = GetComponent<PlayerHealthSystem>();
+
         m_playerRigidbody = GetComponent<Rigidbody2D>();
         m_playerSpriteRenderer = GetComponent<SpriteRenderer>();
         m_groundCheck = GetComponentInChildren<GroundCheck>();
@@ -110,6 +110,9 @@ public class PlayerMovementHandler : MonoBehaviour
         m_playerPhysMatFriction = m_playerCollider.friction;
     }
 
+    /// <summary>
+    /// Update the active physics material on the player.
+    /// </summary>
     private void UpdatePhysicsMaterial()
     {
         // Set the friction of the player's collider to 0 to keep them from sticking to walls
@@ -143,7 +146,7 @@ public class PlayerMovementHandler : MonoBehaviour
 
     #region ______________________________________________________________________HANDLERS__________________________
     /// <summary>
-    /// Handles and applies the horizontal input received from the player
+    /// Handles and applies the horizontal input received from the player.
     /// </summary>
     private void HorizontalMoveInputHandler()
     {

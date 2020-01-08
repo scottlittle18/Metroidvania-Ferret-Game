@@ -4,12 +4,16 @@ using UnityEngine;
 using UnityEngine.Animations;
 
 /// <summary>
-/// Used to handle the checkpoint system.
+/// Purpose:
+///     This is used to keep track of which checkpoint the player will respawn at upon death.
 /// </summary>
 public class Checkpoint : MonoBehaviour
 {    
-    private bool m_isActivated;   
-    private Animator m_anim;
+    private bool m_isActivated;
+
+    //TODO: Animate Checkpoint
+    //private Animator m_anim;
+
     private PlayerHealthSystem m_playerHealth;
     /// <summary>
     /// Property Used to Activate or Deactivate checkpoints
@@ -23,13 +27,15 @@ public class Checkpoint : MonoBehaviour
         set
         {
             m_isActivated = value;
-            UpdateAnimation();
+            //TODO: Animate Checkpoint
+            //UpdateAnimation();
         }
     }
 
     private void Awake()
     {
-        m_anim = GetComponent<Animator>();
+        //TODO: Animate Checkpoint
+        //m_anim = GetComponent<Animator>();
     }
 
     private void Start()
@@ -42,7 +48,8 @@ public class Checkpoint : MonoBehaviour
     /// </summary>
     private void UpdateAnimation()
     {
-        m_anim.SetBool("isActivated", IsActivated);
+        //TODO: Animate Checkpoint
+        //m_anim.SetBool("isActivated", IsActivated);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

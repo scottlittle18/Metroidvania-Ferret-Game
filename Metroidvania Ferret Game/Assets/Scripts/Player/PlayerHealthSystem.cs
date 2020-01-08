@@ -2,17 +2,51 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerHealthSystem : MonoBehaviour
+/// <summary>
+/// Purpose:
+///     Handles the Health of the Player Character as well as their respawn
+/// </summary>
+public class PlayerHealthSystem : MonoBehaviour, IDamagable
 {
-    private int m_totalHealth;
-    private int m_currentPlayerHealth;
-
-    private Checkpoint m_currentCheckpoint;
-
-    private Transform m_currentCheckpointTransform, m_spawnPointTransform;
+    /// <summary>
+    /// The maximum amount of health the player can have when their health is full.
+    /// </summary>
+    [SerializeField, Tooltip("The maximum amount of health the player can have when their health is full.")]
+    private int m_maxPlayerHealth;
 
     /// <summary>
-    /// This is the checkpoint that the player will return to if they die.
+    /// How much health does the player have at this point in time?
+    /// </summary>
+    private int m_currentPlayerHealth;
+
+    private bool m_isAlive;
+
+    public bool IsAlive
+    {
+        get { return m_isAlive; }
+        private set
+        {
+            m_isAlive = m_currentPlayerHealth > 0 ? true : false;
+        }
+    }
+
+    /// <summary>
+    /// The position the player will start the level at.
+    /// </summary>
+    private Transform m_levelStartPointTransform;
+
+    /// <summary>
+    /// The position of the current Checkpoint.
+    /// </summary>
+    private Transform m_currentCheckpointTransform;
+
+    /// <summary>
+    /// *USE CurrentCheckpoint PROPERTY INSTEAD*
+    /// </summary>
+    private Checkpoint m_currentCheckpoint;
+    
+    /// <summary>
+    /// The Checkpoint that the player will respawn at upon death.
     /// </summary>
     public Checkpoint CurrentCheckpoint
     {
@@ -24,16 +58,31 @@ public class PlayerHealthSystem : MonoBehaviour
         {
             if (m_currentCheckpoint == null)
             {
+                //If no checkpoint has been reached yet, then there is no need to deactivate an old checkpoint
                 m_currentCheckpoint = value;
                 m_currentCheckpoint.IsActivated = true;
             }
             else
             {
+                //Deactivate old checkpoint
                 m_currentCheckpoint.IsActivated = false;
+
+                //Set to the new checkpoint
                 m_currentCheckpoint = value;
+
+                //Activate new checkpoint
                 m_currentCheckpoint.IsActivated = true;
             }
         }
+    }
+
+    private void Awake()
+    {
+        //Start player with a full health bar
+        m_currentPlayerHealth = m_maxPlayerHealth;
+
+        //Makes whatever position the player is position at 
+        m_levelStartPointTransform.position = GameObject.FindGameObjectWithTag("Spawn Point").transform.position;
     }
 
     // Start is called before the first frame update
@@ -45,6 +94,25 @@ public class PlayerHealthSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (m_currentPlayerHealth <= 0)
+        {
+            Die();
+        }
+    }
+
+    public void TakeDamage(int damageRecieved)
+    {
+        //TODO: Debug PlayerHealthSystem TakeDamage()
+        Debug.Log($"Player has taken damage!");
         
+        m_currentPlayerHealth -= damageRecieved;
+
+        Debug.Log($"Player now has {m_currentPlayerHealth}HP");
+    }
+
+    public void Die()
+    {
+        //TODO: Debug PlayerDeath
+        Debug.Log("Player is dead.");
     }
 }
