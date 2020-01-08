@@ -2,9 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Purpose:
+///     This script is meant to be attached to ascending platforms to keep them from flying off, but also allows them to be heavy enough to control the rate in which they rise.
+///     
+/// Note:
+///     *This requires a Rigidbody2D component in order to allow it to be effected by gravity applied by the Unity Physics System*
+/// </summary>
+[RequireComponent(typeof(Rigidbody2D))]
 public class RisingPlatformVelocityLimiter : MonoBehaviour
 {
-    [SerializeField]
+    [SerializeField, Tooltip("What is the maximum speed that this platform will be able to rise")]
     private float m_maxVelocity;
 
     private Rigidbody2D m_platformBody;
