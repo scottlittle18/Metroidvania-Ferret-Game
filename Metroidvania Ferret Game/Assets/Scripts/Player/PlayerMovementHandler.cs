@@ -74,8 +74,28 @@ public class PlayerMovementHandler : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (m_playerHealthSystem.IsAlive)
+        if (m_playerHealthSystem != null)
         {
+            if (m_playerHealthSystem.IsAlive)
+            {
+                //--Listeners--
+                HorizontalMoveInputListener();
+                JumpInputListener();
+
+                //If input to the horizontal axis is detected, update the look direction to keep the sprite facing the last direction the player moved in
+                if (!Mathf.Approximately(m_inputListener.m_horizontalMoveInput, 0.0f))
+                    UpdateLookDirection();
+            }
+            else
+            {
+                Debug.Log($"IsAlive == {m_playerHealthSystem.IsAlive}");
+            }
+        }
+        else
+        {
+            //TODO: Debug log for health system null check
+            Debug.Log("Health System was not detected.");
+
             //--Listeners--
             HorizontalMoveInputListener();
             JumpInputListener();
@@ -185,7 +205,7 @@ public class PlayerMovementHandler : MonoBehaviour
     private void JumpInputHandler()
     {
         //TODO: Debugging Jump
-        Debug.Log($"JumpInputHandler() Entered...");
+        Debug.Log($"Awaiting jump input...");
 
         // If the player is trying to jump
         if (m_groundCheck.IsGrounded && m_inputListener.m_jumpInput)

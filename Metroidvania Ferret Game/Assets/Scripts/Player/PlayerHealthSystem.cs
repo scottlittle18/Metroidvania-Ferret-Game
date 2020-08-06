@@ -19,7 +19,7 @@ public class PlayerHealthSystem : MonoBehaviour, IDamagable
     /// </summary>
     private int m_currentPlayerHealth;
 
-    private bool m_isAlive;
+    private bool m_isAlive = true;
 
     public bool IsAlive
     {
@@ -81,8 +81,23 @@ public class PlayerHealthSystem : MonoBehaviour, IDamagable
         //Start player with a full health bar
         m_currentPlayerHealth = m_maxPlayerHealth;
 
-        //Makes whatever position the player is position at 
-        m_levelStartPointTransform.position = GameObject.FindGameObjectWithTag("Spawn Point").transform.position;
+        // TODO: Debug to display player's current health
+        Debug.Log($"The player's current health is: {m_currentPlayerHealth}");
+
+        GameObject spawnPoint = GameObject.FindGameObjectWithTag("Spawn Point");
+
+        if (spawnPoint != null)
+        {
+            m_levelStartPointTransform = GetComponent<Transform>();
+
+            //Sets the player's position to be at the Spawn Point 
+            m_levelStartPointTransform.transform.position = spawnPoint.transform.position;
+        }
+        else
+        {
+            //TODO: Debug log for checking if a spawn point exists in the given level
+            Debug.Log("A spawn point was not detected...");
+        }
     }
 
     // Start is called before the first frame update
